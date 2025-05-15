@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Consultation Page Styles */
+    .hero-section {
+        min-height: 60vh;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5rem 0;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        position: relative;
+        margin-bottom: 3rem;
+        display: inline-block;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 4px;
+        background: #2e7d32;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Consultation Form */
+    .consultation-form {
+        background: white;
+        border-radius: 12px;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        margin: 0 auto;
+        max-width: 900px;
+    }
+    
+    .form-control {
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+    }
+    
+    .btn-success {
+        background-color: #2e7d32;
+        border: none;
+        padding: 0.75rem 2.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-success:hover {
+        background-color: #245a27;
+        transform: translateY(-2px);
+    }
+    
+    /* Benefits Section */
+    .benefit-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .benefit-card h4 {
+        color: #2e7d32;
+        margin-bottom: 1rem;
+    }
+    
+    /* Testimonials */
+    .testimonial-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+    }
+    
+    .testimonial-card::before {
+        content: '\201C';
+        font-size: 5rem;
+        color: rgba(46, 125, 50, 0.1);
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        line-height: 1;
+    }
+    
+    .testimonial-card blockquote {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .blockquote-footer {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 50vh;
+            padding: 3rem 0;
+        }
+        
+        .consultation-form {
+            padding: 2rem;
+        }
+    }
+</style>
+
+<!-- Consultation Hero Section -->
+<section class="hero-section" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), url({% static 'images/consultation-bg.jpg' %});">
+    <div class="hero-content">
+        <h1 class="display-4 font-weight-bold mb-4">Schedule a Consultation</h1>
+        <p class="lead mb-5">Connect with our experts to explore sustainable agricultural solutions tailored to your needs.</p>
+        <a href="#consultation-form" class="btn btn-success btn-lg">Book Now</a>
+    </div>
+</section>
+
+<!-- Consultation Form Section -->
+<section id="consultation-form" class="py-7">
+    <div class="container">
+        <h2 class="section-title text-center font-weight-bold">Book Your Free Consultation</h2>
+        <form method="POST" action="{% url 'consultation' %}" class="needs-validation consultation-form" novalidate>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="name" class="form-label">Full Name *</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                    <div class="invalid-feedback">Please enter your full name.</div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="email" class="form-label">Email Address *</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="phone" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                    <div class="invalid-feedback">Please enter your phone number.</div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="location" class="form-label">Location *</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                    <div class="invalid-feedback">Please enter your location.</div>
+                </div>
+                <div class="col-12 mb-4">
+                    <label for="message" class="form-label">Your Agricultural Needs *</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Tell us about your farm, challenges, and goals..."></textarea>
+                    <div class="invalid-feedback">Please describe your agricultural needs.</div>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success btn-lg px-5">Submit Request</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Consultation Benefits Section -->
+<section class="py-7 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center font-weight-bold">Why Choose Our Consultation?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-user-tie fa-3x text-success"></i>
+                    </div>
+                    <h4 class="text-center font-weight-bold">Expert Guidance</h4>
+                    <p class="text-muted text-center">Receive personalized advice from experienced agricultural specialists with decades of combined experience.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-seedling fa-3x text-success"></i>
+                    </div>
+                    <h4 class="text-center font-weight-bold">Tailored Solutions</h4>
+                    <p class="text-muted text-center">Get customized recommendations based on your specific soil, climate, and farming objectives.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-leaf fa-3x text-success"></i>
+                    </div>
+                    <h4 class="text-center font-weight-bold">Sustainable Practices</h4>
+                    <p class="text-muted text-center">Learn eco-friendly techniques that boost productivity while preserving your land for future generations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-7">
+    <div class="container">
+        <h2 class="section-title text-center font-weight-bold">What Our Clients Say</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <blockquote class="blockquote">
+                        <p>"Eco Hope's consultation transformed our farming practices, leading to a 40% increase in yield while reducing water usage."</p>
+                        <footer class="blockquote-footer">John Doe, <cite>Commercial Farmer</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <blockquote class="blockquote">
+                        <p>"The personalized advice we received was invaluable in transitioning our farm to organic practices without losing productivity."</p>
+                        <footer class="blockquote-footer">Jane Smith, <cite>Organic Farm Owner</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <blockquote class="blockquote">
+                        <p>"Highly recommend Eco Hope for anyone looking to enhance their agricultural practices with sustainable solutions."</p>
+                        <footer class="blockquote-footer">Samuel Lee, <cite>Agricultural Cooperative Manager</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Form validation
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+{% endblock %}

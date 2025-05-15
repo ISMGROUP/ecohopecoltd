@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Team - EcoHope{% endblock %}
+
+{% block content %}
+<style>
+    .team-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ee 100%);
+        padding: 5rem 0;
+    }
+    
+    .team-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        color: #1a5c3a;
+        position: relative;
+        margin-bottom: 4rem;
+        text-align: center;
+    }
+    
+    .team-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #2e8b57;
+        margin: 1rem auto 0;
+    }
+    
+    .team-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        padding: 0 2rem;
+    }
+    
+    .team-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+    }
+    
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .team-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #2e8b57, #4CAF50);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .team-card:hover::before {
+        opacity: 1;
+    }
+    
+    .member-photo {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        object-position: top;
+        transition: transform 0.5s ease;
+    }
+    
+    .team-card:hover .member-photo {
+        transform: scale(1.05);
+    }
+    
+    .member-info {
+        padding: 1.75rem;
+        text-align: center;
+    }
+    
+    .member-name {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: #1a3e2a;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+    }
+    
+    .team-card:hover .member-name {
+        color: #2e8b57;
+    }
+    
+    .member-title {
+        color: #4CAF50;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(46, 139, 87, 0.1);
+        border-radius: 50px;
+    }
+    
+    .member-bio {
+        color: #5a6d5e;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .social-link {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f1f8f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2e8b57;
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        background: #2e8b57;
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    @media (max-width: 768px) {
+        .team-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+        
+        .member-photo {
+            height: 240px;
+        }
+    }
+</style>
+
+<section class="team-section">
+    <div class="container mx-auto px-4">
+        <h1 class="team-title">Meet Our Dedicated Team</h1>
+        
+        <div class="team-grid">
+            {% for member in members %}
+            <div class="team-card">
+                <img class="member-photo" src="{{ member.photo.url }}" alt="{{ member.name }}">
+                <div class="member-info">
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <span class="member-title">{{ member.title }}</span>
+                    <p class="member-bio">{{ member.bio|truncatewords:20 }}</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    // Add smooth reveal animation when scrolling
+    document.addEventListener('DOMContentLoaded', function() {
+        const teamCards = document.querySelectorAll('.team-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        teamCards.forEach((card, index) => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

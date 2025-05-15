@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .thank-you-section {
+        padding: 6rem 0;
+        background: linear-gradient(135deg, #e6f4ea 0%, #ffffff 100%);
+        text-align: center;
+    }
+
+    .thank-you-section h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #28a745;
+        margin-bottom: 1.5rem;
+        animation: fadeInDown 1s ease-in-out;
+    }
+
+    .thank-you-section p {
+        font-size: 1.2rem;
+        color: #444;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .thank-you-section a.btn {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .thank-you-section a.btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .thank-you-section h1 {
+            font-size: 2.25rem;
+        }
+
+        .thank-you-section p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<section class="thank-you-section">
+    <div class="container">
+        <h1>Thank You!</h1>
+        <p>Thank you for subscribing to Eco Hope co ltd! Know that you have become part of us.</p>
+        <p>Check your email for a confirmation message.</p>
+        <p>Please note that <strong>Eco Hope Co. Ltd</strong> responds within 24hrs.</p>
+        <a href="{% url 'home' %}" class="btn btn-success mt-4">Back to Home</a>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    window.addEventListener('load', function () {
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }, 500);
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Newsletter Subscription{% endblock %}
+
+{% block content %}
+<section class="newsletter-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Subscribe to Our Newsletter</h2>
+        <p class="text-center mb-4">Get the latest updates, articles, and promotions straight to your inbox.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" action="{% url 'newsletter' %}" id="newsletterForm" class="p-4 border rounded bg-light shadow">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="form-group mb-3">
+                        <label for="email">Email Address</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Simple email format check (client-side)
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+        const email = document.getElementById('email').value;
+        const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!pattern.test(email)) {
+            e.preventDefault();
+            alert("Please enter a valid email address.");
+        }
+    });
+</script>
+{% endblock %}

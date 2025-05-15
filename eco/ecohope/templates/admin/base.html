@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ title }} | {{ site_title|default:_('Eco Hope Admin') }}
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+        <a href="{% url 'admin:index' %}" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="{% static 'images/logo.png' %}" height="40" alt="Eco Hope Logo" style="vertical-align: middle;">
+            <span style="color: white; font-size: 22px; font-weight: bold; margin-left: 12px;">Eco Hope Admin</span>
+        </a>
+    </h1>
+{% endblock %}
+
+{% block nav-global %}
+    {# Remove default nav links like "View site" here if needed #}
+{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        :root {
+            --primary: #2e8b57;     /* Eco Hope Green */
+            --secondary: #3a5a40;
+            --accent: #81c784;
+        }
+
+        #header {
+            background: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding: 10px 20px;
+        }
+
+        #site-name a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .module h2,
+        .module caption,
+        .inline-group h2 {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        a:link,
+        a:visited {
+            color: var(--accent);
+        }
+
+        .submit-row input.default,
+        .button,
+        input[type=submit],
+        input[type=button] {
+            background-color: var(--secondary);
+            border: none;
+        }
+
+        .submit-row input.default:hover,
+        .button:hover {
+            background-color: var(--primary);
+        }
+
+        /* Optional: Customize sidebar, login, etc. */
+        #nav-sidebar {
+            background-color: #f1f8e9;
+        }
+    </style>
+{% endblock %}

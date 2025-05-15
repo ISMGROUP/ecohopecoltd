@@ -1,0 +1,31 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<div class="custom-admin-dashboard">
+    <div class="app-list">
+        {% for app in app_list %}
+        <div class="app-card">
+            <div class="app-header">
+                <h2>{{ app.name }}</h2>
+            </div>
+            <div class="app-models">
+                {% for model in app.models %}
+                <div class="model-item">
+                    <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                    <div class="model-actions">
+                        <a href="{{ model.add_url }}" class="addlink">Add</a>
+                        <a href="{{ model.admin_url }}" class="changelink">View</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="admin-stats">
+        <h2>Quick Stats</h2>
+        <!-- Add your custom stats here -->
+    </div>
+</div>
+{% endblock %}

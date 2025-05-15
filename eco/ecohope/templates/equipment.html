@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Agricultural Equipment | Eco Hope Co. Ltd{% endblock %}
+
+{% block content %}
+<style>
+    .equipment-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{% static "images/equipment-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        min-height: 60vh;
+    }
+    
+    .equipment-card {
+        border-radius: 10px;
+        overflow: hidden;
+        transition: var(--transition);
+        border: none;
+    }
+    
+    .equipment-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .equipment-card .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .equipment-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 2;
+    }
+    
+    .category-card {
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        transition: var(--transition);
+        text-align: center;
+        padding: 2rem 1rem;
+        height: 100%;
+    }
+    
+    .category-card:hover {
+        border-color: var(--primary);
+        background: rgba(42, 127, 63, 0.05);
+    }
+    
+    .category-card .icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(42, 127, 63, 0.1);
+        color: var(--primary);
+        border-radius: 50%;
+        font-size: 1.75rem;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(42, 127, 63, 0.1);
+        color: var(--primary);
+        border-radius: 50%;
+        font-size: 1.25rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="equipment-hero d-flex align-items-center">
+    <div class="container text-white text-center">
+        <h1 class="display-4 fw-bold mb-4">Agricultural Equipment</h1>
+        <p class="lead mb-5 mx-auto" style="max-width: 700px;">Premium quality farm machinery and tools to modernize your agricultural operations.</p>
+        <a href="#equipment-categories" class="btn btn-primary btn-lg px-5 py-3">Browse Equipment</a>
+    </div>
+</section>
+
+<!-- Equipment Categories -->
+<section class="py-7" id="equipment-categories">
+    <div class="container">
+        <div class="text-center mb-6">
+            <span class="text-success fw-bold">OUR RANGE</span>
+            <h2 class="section-title">Equipment Categories</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">We supply all types of agricultural equipment for farms of every size.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <a href="#tillage" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Tillage Equipment</h3>
+                        <p class="text-muted small mb-0">Plows, harrows, cultivators and more for soil preparation.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <a href="#planting" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Planting Equipment</h3>
+                        <p class="text-muted small mb-0">Seeders, planters, transplanters for efficient planting.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <a href="#irrigation" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Irrigation Systems</h3>
+                        <p class="text-muted small mb-0">Drip, sprinkler, and pivot irrigation solutions.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <a href="#harvesting" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="icon">
+                            <i class="fas fa-harvest"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-2">Harvesting Equipment</h3>
+                        <p class="text-muted small mb-0">Combine harvesters, threshers, and more.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured Equipment -->
+<section class="py-7 bg-light">
+    <div class="container">
+        <div class="text-center mb-6">
+            <span class="text-success fw-bold">FEATURED PRODUCTS</span>
+            <h2 class="section-title">Popular Farm Equipment</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">Quality machinery trusted by Ugandan farmers.</p>
+        </div>
+        
+        <div class="row g-4">
+            {% for equipment in featured_equipment %}
+            <div class="col-md-6 col-lg-3">
+                <div class="card equipment-card h-100">
+                    {% if equipment.is_new %}
+                    <span class="equipment-badge badge bg-success">NEW</span>
+                    {% endif %}
+                    
+                    {% if equipment.image %}
+                    <img src="{{ equipment.image.url }}" class="card-img-top" alt="{{ equipment.name }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="Placeholder">
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ equipment.name }}</h5>
+                        <p class="card-text text-muted small">{{ equipment.short_description }}</p>
+                        <ul class="list-unstyled text-muted small mb-3">
+                            {% if equipment.key_feature_1 %}
+                            <li class="mb-1"><i class="fas fa-check-circle text-success me-2"></i> {{ equipment.key_feature_1 }}</li>
+                            {% endif %}
+                            {% if equipment.key_feature_2 %}
+                            <li class="mb-1"><i class="fas fa-check-circle text-success me-2"></i> {{ equipment.key_feature_2 }}</li>
+                            {% endif %}
+                            {% if equipment.key_feature_3 %}
+                            <li><i class="fas fa-check-circle text-success me-2"></i> {{ equipment.key_feature_3 }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <div class="alert alert-info">
+                    Our equipment catalog is currently being updated. Check back soon!
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-primary px-5">View All Equipment</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-7 bg-success text-white text-center">
+    <div class="container">
+        <h2 class="mb-4 fw-bold">Ready to Upgrade Your Farm?</h2>
+        <p class="lead mb-4">Partner with Eco Hope Co. Ltd today and experience the future of farming with modern equipment tailored to your needs.</p>
+        <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5 py-3">Contact Us</a>
+    </div>
+</section>
+{% endblock %}

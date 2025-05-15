@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Careers Page with Bootstrap -->
+<div class="careers-page">
+    <!-- Hero Section -->
+    <section class="hero-section bg-primary text-white py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">Build Your Career at Eco Hope Co. Ltd</h1>
+                    <p class="lead mb-4">Join our mission to create sustainable solutions and make a real impact on our planet's future.</p>
+                    <button class="btn btn-light btn-lg px-4 me-2" onclick="scrollToOpenings()">View Openings</button>
+                    <button class="btn btn-outline-light btn-lg px-4" onclick="showCultureVideo()">Our Culture</button>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <img src="/static/images/ben.jpg" alt="Eco Hope Team" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section py-5">
+        <div class="container py-3">
+            <h2 class="text-center mb-5">Why Join Our Team</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-box bg-light-primary rounded-circle p-3 mb-3 mx-auto">
+                                <i class="bi bi-globe fs-2 text-primary"></i>
+                            </div>
+                            <h3 class="h5">Global Impact</h3>
+                            <p class="text-muted">Work on projects that make a measurable difference in environmental conservation worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-box bg-light-success rounded-circle p-3 mb-3 mx-auto">
+                                <i class="bi bi-graph-up fs-2 text-success"></i>
+                            </div>
+                            <h3 class="h5">Career Growth</h3>
+                            <p class="text-muted">Access mentorship programs, training budgets, and clear promotion pathways.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-box bg-light-warning rounded-circle p-3 mb-3 mx-auto">
+                                <i class="bi bi-people fs-2 text-warning"></i>
+                            </div>
+                            <h3 class="h5">Inclusive Culture</h3>
+                            <p class="text-muted">Join a diverse team that values collaboration, innovation, and work-life balance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Openings -->
+    <section id="openings" class="openings-section bg-light py-5">
+        <div class="container py-3">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="mb-0">Current Opportunities</h2>
+                <div class="filter-controls">
+                    <select id="departmentFilter" class="form-select" style="width: 200px;">
+                        <option value="">All Departments</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Research">Research</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="jobListings" class="row g-4">
+                {% if job_openings %}
+                    {% for job in job_openings %}
+                    <div class="col-md-6 job-card" data-department="{{ job.department }}">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h3 class="h5">{{ job.title }}</h3>
+                                        <div class="d-flex gap-3 mb-2">
+                                            <span class="text-muted"><i class="bi bi-geo-alt"></i> {{ job.location }}</span>
+                                            <span class="text-muted"><i class="bi bi-building"></i> {{ job.department }}</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-primary">{{ job.type }}</span>
+                                </div>
+                                <p class="mb-3">{{ job.short_description }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Posted {{ job.post_date|timesince }}</small>
+                                    <a href="/careers/{{ job.id }}" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            <p class="mb-0">There are currently no open positions. Please check back later or <a href="#subscribe">subscribe to our job alerts</a>.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section py-5">
+        <div class="container py-3">
+            <h2 class="text-center mb-5">Our Benefits</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card text-center p-4">
+                        <i class="bi bi-heart-pulse fs-1 text-danger mb-3"></i>
+                        <h3 class="h5">Health & Wellness</h3>
+                        <p class="text-muted mb-0">Comprehensive medical, dental, and mental health coverage</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card text-center p-4">
+                        <i class="bi bi-coin fs-1 text-success mb-3"></i>
+                        <h3 class="h5">Financial Security</h3>
+                        <p class="text-muted mb-0">Competitive salaries and retirement planning</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card text-center p-4">
+                        <i class="bi bi-calendar2-heart fs-1 text-primary mb-3"></i>
+                        <h3 class="h5">Time Off</h3>
+                        <p class="text-muted mb-0">Generous vacation and flexible work arrangements</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card text-center p-4">
+                        <i class="bi bi-lightbulb fs-1 text-warning mb-3"></i>
+                        <h3 class="h5">Learning</h3>
+                        <p class="text-muted mb-0">Annual education stipend and conference budgets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture CTA -->
+    <section class="culture-cta bg-dark text-white py-5">
+        <div class="container py-3">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-3">Experience Our Culture</h2>
+                    <p class="lead mb-4">See what makes Eco Hope Co. Ltd a great place to grow your career and make a difference.</p>
+                    <button class="btn btn-light" onclick="showCultureVideo()">
+                        <i class="bi bi-play-circle me-2"></i> Watch Video
+                    </button>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="ratio ratio-16x9">
+                        <img src="/static/images/culture-thumbnail.jpg" alt="Company Culture" class="rounded shadow" 
+                             onclick="showCultureVideo()" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Modal -->
+    <div class="modal fade" id="cultureVideoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Our Workplace Culture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="cultureVideoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    // Department filter functionality
+    document.getElementById('departmentFilter').addEventListener('change', function() {
+        const department = this.value;
+        const jobCards = document.querySelectorAll('.job-card');
+        
+        jobCards.forEach(card => {
+            if (department === '' || card.dataset.department === department) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Scroll to openings section
+    function scrollToOpenings() {
+        document.getElementById('openings').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    // Show culture video modal
+    function showCultureVideo() {
+        const modal = new bootstrap.Modal(document.getElementById('cultureVideoModal'));
+        const frame = document.getElementById('cultureVideoFrame');
+        frame.src = 'https://www.youtube.com/embed/EXAMPLE_VIDEO_ID?autoplay=1';
+        modal.show();
+        
+        // Reset video when modal closes
+        document.getElementById('cultureVideoModal').addEventListener('hidden.bs.modal', function() {
+            frame.src = '';
+        });
+    }
+
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+
+<!-- CSS Styles -->
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #198754 0%, #0d6efd 100%);
+    }
+    
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .benefit-card {
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .culture-cta {
+        background: url('/static/images/culture-bg.jpg') no-repeat center center;
+        background-size: cover;
+        position: relative;
+    }
+    
+    .culture-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .culture-cta > .container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .job-card {
+        transition: opacity 0.3s ease;
+    }
+    
+    .job-card:not([style*="display: block"]) {
+        opacity: 0.5;
+    }
+</style>
+{% endblock %}

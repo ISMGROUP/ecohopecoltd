@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Blog Page Styles */
+    .blog-hero {
+        min-height: 50vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "images/blog-hero.jpg" %}') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+    }
+    
+    .blog-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        height: 100%;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-card img {
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .blog-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    .blog-card .card-body {
+        padding: 25px;
+    }
+    
+    .blog-card .card-title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    
+    .blog-card .card-text {
+        color: #666;
+        margin-bottom: 20px;
+    }
+    
+    .blog-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        color: #777;
+    }
+    
+    .blog-meta i {
+        margin-right: 5px;
+        color: #4CAF50;
+    }
+    
+    .blog-meta span {
+        margin-right: 15px;
+    }
+    
+    .tag {
+        display: inline-block;
+        background: #f0f0f0;
+        color: #555;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    .tag:hover {
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+    }
+    
+    .pagination .page-item.active .page-link {
+        background-color: #4CAF50;
+        border-color: #4CAF50;
+    }
+    
+    .pagination .page-link {
+        color: #4CAF50;
+    }
+    
+    .sidebar-widget {
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .sidebar-widget h4 {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .sidebar-widget h4::after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background: #4CAF50;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .recent-post {
+        display: flex;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .recent-post:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .recent-post-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+    
+    .recent-post-title {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+    }
+    
+    .recent-post-date {
+        font-size: 0.8rem;
+        color: #777;
+    }
+    
+    .search-box {
+        position: relative;
+    }
+    
+    .search-box input {
+        padding-right: 40px;
+        border-radius: 30px;
+    }
+    
+    .search-box button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background: none;
+        border: none;
+        color: #4CAF50;
+    }
+    
+    @media (max-width: 991.98px) {
+        .blog-card {
+            margin-bottom: 30px;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="blog-hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 font-weight-bold mb-4">Eco Hope Blog</h1>
+                <p class="lead mb-5">Insights, news, and stories about sustainable agriculture in Uganda</p>
+                <div class="search-box">
+                    <form action="{% url 'blog' %}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" name="q" placeholder="Search blog posts...">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Content -->
+<section class="py-7">
+    <div class="container">
+        <div class="row">
+            <!-- Main Blog Content -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <!-- Blog Post 1 -->
+                    <div class="col-md-6 mb-5">
+                        <div class="blog-card">
+                            <img src="{% static 'images/blog1.jpg' %}" class="card-img-top" alt="Sustainable Farming">
+                            <div class="card-body">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> June 15, 2023</span>
+                                    <span><i class="far fa-user"></i> By Asizo Viola</span>
+                                </div>
+                                <h3 class="card-title">5 Sustainable Farming Practices for Uganda</h3>
+                                <p class="card-text">Discover how Ugandan farmers are adopting eco-friendly techniques to improve yields while protecting the environment...</p>
+                                <div class="mb-3">
+                                    <a href="#" class="tag">Sustainability</a>
+                                    <a href="#" class="tag">Farming</a>
+                                    <a href="#" class="tag">Uganda</a>
+                                </div>
+                                <a href="#" class="btn btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Post 2 -->
+                    <div class="col-md-6 mb-5">
+                        <div class="blog-card">
+                            <img src="{% static 'images/blog2.jpg' %}" class="card-img-top" alt="Seed Selection">
+                            <div class="card-body">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> May 28, 2023</span>
+                                    <span><i class="far fa-user"></i> By John Doe</span>
+                                </div>
+                                <h3 class="card-title">Choosing the Right Seeds for Your Climate</h3>
+                                <p class="card-text">Learn how to select the best seed varieties for Uganda's diverse climate zones to maximize your harvest potential...</p>
+                                <div class="mb-3">
+                                    <a href="#" class="tag">Seeds</a>
+                                    <a href="#" class="tag">Climate</a>
+                                    <a href="#" class="tag">Tips</a>
+                                </div>
+                                <a href="#" class="btn btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Post 3 -->
+                    <div class="col-md-6 mb-5">
+                        <div class="blog-card">
+                            <img src="{% static 'images/blog3.jpg' %}" class="card-img-top" alt="Organic Fertilizers">
+                            <div class="card-body">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> April 12, 2023</span>
+                                    <span><i class="far fa-user"></i> By Jane Smith</span>
+                                </div>
+                                <h3 class="card-title">The Benefits of Organic Fertilizers</h3>
+                                <p class="card-text">Why more Ugandan farmers are switching to organic fertilizers and how it's improving soil health across the country...</p>
+                                <div class="mb-3">
+                                    <a href="#" class="tag">Fertilizers</a>
+                                    <a href="#" class="tag">Organic</a>
+                                    <a href="#" class="tag">Soil Health</a>
+                                </div>
+                                <a href="#" class="btn btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Post 4 -->
+                    <div class="col-md-6 mb-5">
+                        <div class="blog-card">
+                            <img src="{% static 'images/blog4.jpg' %}" class="card-img-top" alt="Irrigation Techniques">
+                            <div class="card-body">
+                                <div class="blog-meta">
+                                    <span><i class="far fa-calendar-alt"></i> March 5, 2023</span>
+                                    <span><i class="far fa-user"></i> By Robert Omondi</span>
+                                </div>
+                                <h3 class="card-title">Water-Saving Irrigation Techniques</h3>
+                                <p class="card-text">Innovative irrigation methods that are helping Ugandan farmers conserve water while maintaining crop yields...</p>
+                                <div class="mb-3">
+                                    <a href="#" class="tag">Irrigation</a>
+                                    <a href="#" class="tag">Water</a>
+                                    <a href="#" class="tag">Technology</a>
+                                </div>
+                                <a href="#" class="btn btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Blog pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar-widget">
+                    <h4>About Our Blog</h4>
+                    <p>The Eco Hope blog shares knowledge, stories, and innovations in sustainable agriculture. Our experts and guest contributors provide practical advice for farmers across Uganda.</p>
+                    <a href="{% url 'about' %}" class="btn btn-outline-success btn-sm">Learn About Us</a>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h4>Categories</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Sustainable Farming</a></li>
+                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Crop Management</a></li>
+                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Soil Health</a></li>
+                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Pest Control</a></li>
+                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Farmer Stories</a></li>
+                        <li><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Company News</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h4>Recent Posts</h4>
+                    <div class="recent-post">
+                        <img src="{% static 'images/blog-thumb1.jpg' %}" class="recent-post-img" alt="Post thumb">
+                        <div>
+                            <a href="#" class="recent-post-title">Improving Maize Yields in Dry Seasons</a>
+                            <div class="recent-post-date">June 5, 2023</div>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="{% static 'images/blog-thumb2.jpg' %}" class="recent-post-img" alt="Post thumb">
+                        <div>
+                            <a href="#" class="recent-post-title">The Future of Organic Farming in Uganda</a>
+                            <div class="recent-post-date">May 22, 2023</div>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="{% static 'images/blog-thumb3.jpg' %}" class="recent-post-img" alt="Post thumb">
+                        <div>
+                            <a href="#" class="recent-post-title">New Seed Varieties for 2023</a>
+                            <div class="recent-post-date">May 10, 2023</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h4>Tags</h4>
+                    <div class="tags">
+                        <a href="#" class="tag">Agriculture</a>
+                        <a href="#" class="tag">Farming</a>
+                        <a href="#" class="tag">Sustainability</a>
+                        <a href="#" class="tag">Seeds</a>
+                        <a href="#" class="tag">Fertilizers</a>
+                        <a href="#" class="tag">Irrigation</a>
+                        <a href="#" class="tag">Uganda</a>
+                        <a href="#" class="tag">Tips</a>
+                        <a href="#" class="tag">Technology</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-7 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h3 class="font-weight-bold mb-4">Subscribe to Our Newsletter</h3>
+                <p class="mb-5">Get the latest agricultural tips, news, and updates directly to your inbox</p>
+                <form class="form-inline justify-content-center">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+                    </div>
+                    <button type="submit" class="btn btn-success mb-2 btn-lg">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Blog search functionality
+    document.addEventListener("DOMContentLoaded", function() {
+        // Highlight current category in sidebar
+        const currentUrl = window.location.pathname;
+        document.querySelectorAll('.sidebar-widget a').forEach(link => {
+            if (link.getAttribute('href') === currentUrl) {
+                link.classList.add('font-weight-bold');
+                link.innerHTML = `<i class="fas fa-chevron-right mr-2"></i>${link.textContent}`;
+            }
+        });
+        
+        // Blog card hover effects
+        const blogCards = document.querySelectorAll('.blog-card');
+        blogCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.querySelector('.btn-outline-success').classList.add('btn-success');
+                this.querySelector('.btn-outline-success').classList.remove('btn-outline-success');
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.querySelector('.btn-success').classList.add('btn-outline-success');
+                this.querySelector('.btn-success').classList.remove('btn-success');
+            });
+        });
+        
+        // Tag click handler
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                // In a real implementation, this would filter blog posts by tag
+                alert(`Filtering posts by tag: ${this.textContent}`);
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Service Page Styles */
+    .service-hero {
+        min-height: 50vh;
+        position: relative;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{% static 'images/eco1.jpg' %}') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        color: white;
+        height: 40vh;
+    }
+    
+    .service-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        height: 100%;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-card img {
+        transition: transform 0.5s ease;
+        height: 220px;
+        object-fit: cover;
+    }
+    
+    .service-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    .service-card .card-body {
+        padding: 25px;
+    }
+    
+    .service-card .card-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .service-card .card-title::after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background: #4CAF50;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .section-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 50px;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        width: 80px;
+        height: 4px;
+        background: #4CAF50;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+    
+    /* Animation Classes */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+    }
+    
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    @media (max-width: 992px) {
+        .hero-carousel {
+            height: 40vh;
+            min-height: 200px;
+        }
+        
+    }
+    
+</style>
+
+<!-- Hero Section -->
+<section class="service-hero">
+    <div class="container text-center">
+        <h1 class="display-3 font-weight-bold mb-4">Our Agricultural Services</h1>
+        <p class="lead mb-5" style="font-size: 1.5rem;">Comprehensive solutions for modern, sustainable farming</p>
+        <a href="#services" class="btn btn-success btn-lg px-4 py-2">Explore Services</a>
+    </div>
+</section>
+
+<!-- Services List -->
+<section id="services" class="py-7">
+    <div class="container">
+        <div class="text-center mb-6">
+            <h2 class="section-title font-weight-bold">What We Offer</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                Eco Hope provides innovative, affordable solutions to help farmers maximize productivity while protecting the environment.
+            </p>
+        </div>
+        
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll">
+                    <img src="{% static 'images/seeds.jpg' %}" class="card-img-top" alt="High-Quality Seeds">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">High-Quality Seeds</h3>
+                        <p class="card-text text-muted">
+                            Certified, high-yielding seed varieties adapted to local conditions. Our seeds are tested for germination rates and disease resistance.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Drought-resistant varieties</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Disease-free certification</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Improved yields</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll" data-delay="0.2s">
+                    <img src="{% static 'images/fertilizers.jpg' %}" class="card-img-top" alt="Fertilizers">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">Organic & Chemical Fertilizers</h3>
+                        <p class="card-text text-muted">
+                            Balanced nutrient formulations for optimal plant growth. Our fertilizers are tailored to Uganda's soil conditions.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Soil-specific blends</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Organic options available</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Affordable bulk pricing</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll" data-delay="0.4s">
+                    <img src="{% static 'images/farmer.jpg' %}" class="card-img-top" alt="Farmer Training">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">Farmer Training</h3>
+                        <p class="card-text text-muted">
+                            Practical workshops on modern farming techniques, climate-smart agriculture, and business skills.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Field demonstrations</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Expert trainers</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Certification programs</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll">
+                    <img src="{% static 'images/consultation.jpg' %}" class="card-img-top" alt="Agricultural Consulting">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">Agricultural Consulting</h3>
+                        <p class="card-text text-muted">
+                            Personalized advice from our agronomists to optimize your farm's productivity and profitability.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Farm assessments</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Crop planning</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Pest management</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll" data-delay="0.2s">
+                    <img src="{% static 'images/tools.jpg' %}" class="card-img-top" alt="Farming Tools">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">Farming Tools & Equipment</h3>
+                        <p class="card-text text-muted">
+                            Quality tools designed to make farming more efficient while reducing labor costs.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Hand tools</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Irrigation equipment</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Post-harvest tools</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card animate-on-scroll" data-delay="0.4s">
+                    <img src="{% static 'images/composit.jpg' %}" class="card-img-top" alt="Compost Production">
+                    <div class="card-body">
+                        <div class="service-icon">
+                            <i class="fas fa-recycle"></i>
+                        </div>
+                        <h3 class="card-title font-weight-bold">Compost & Manure Production</h3>
+                        <p class="card-text text-muted">
+                            Sustainable organic solutions to improve soil health and fertility naturally.
+                        </p>
+                        <ul class="list-unstyled text-muted mb-3">
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Black Soldier Fly compost</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Vermicompost</li>
+                            <li><i class="fas fa-check-circle text-success mr-2"></i> Custom formulations</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-7 bg-light">
+    <div class="container">
+        <div class="text-center mb-6">
+            <h2 class="section-title font-weight-bold">What Farmers Say</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                Hear from farmers who have transformed their operations with our services
+            </p>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="testimonial-slider">
+                    <!-- Testimonial items will be added here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-7 text-white" style="background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);">
+    <div class="container text-center">
+        <h2 class="font-weight-bold mb-4">Ready to Transform Your Farm?</h2>
+        <p class="lead mb-5 mx-auto" style="max-width: 700px;">
+            Contact us today to discuss how we can help you achieve better yields with sustainable practices
+        </p>
+        <div class="d-flex justify-content-center flex-wrap">
+            <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5 py-3 mx-3 mb-3">Get In Touch</a>
+            <a href="tel:+256766670007" class="btn btn-outline-light btn-lg px-5 py-3 mx-3 mb-3">
+                <i class="fas fa-phone-alt mr-2"></i> Call Now
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Scroll animation functionality
+    document.addEventListener("DOMContentLoaded", function() {
+        // Animate elements on scroll
+        const animateElements = function() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        // Initialize on load
+        animateElements();
+        
+        // Run on scroll
+        window.addEventListener('scroll', animateElements);
+        
+        // Testimonial slider functionality
+        const testimonials = [
+            {
+                quote: "Eco Hope's seeds increased my maize yield by 40% last season. Their training on proper planting techniques made all the difference.",
+                name: "Robert Omondi",
+                role: "Maize Farmer, Lira"
+            },
+            {
+                quote: "The organic fertilizers have transformed my soil. After just two seasons, my land is more productive than ever before.",
+                name: "Sarah Nalwoga",
+                role: "Vegetable Farmer, Jinja"
+            },
+            {
+                quote: "The farm tools I purchased have reduced my labor costs significantly. The quality is excellent and they're built to last.",
+                name: "James Okello",
+                role: "Commercial Farmer, Gulu"
+            }
+        ];
+        
+        const testimonialSlider = document.querySelector('.testimonial-slider');
+        
+        if (testimonialSlider) {
+            testimonials.forEach((testimonial, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                testimonialSlider.innerHTML += `
+                    <div class="testimonial-item text-center ${activeClass}">
+                        <div class="testimonial-content bg-white p-5 rounded shadow-sm mx-auto" style="max-width: 800px;">
+                            <i class="fas fa-quote-left fa-2x text-muted mb-4"></i>
+                            <p class="lead font-italic mb-4">${testimonial.quote}</p>
+                            <h5 class="font-weight-bold mb-1">${testimonial.name}</h5>
+                            <p class="text-muted">${testimonial.role}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Simple slider functionality
+            let currentIndex = 0;
+            const items = document.querySelectorAll('.testimonial-item');
+            
+            function showTestimonial(index) {
+                items.forEach(item => item.classList.remove('active'));
+                items[index].classList.add('active');
+            }
+            
+            // Auto-rotate testimonials
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(currentIndex);
+            }, 5000);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

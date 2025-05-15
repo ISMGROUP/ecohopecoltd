@@ -1,0 +1,765 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Eco Hope Co. Ltd | Sustainable Agriculture Solutions{% endblock %}</title>
+    <meta name="description" content="Eco Hope Co. Ltd - Premium agricultural solutions for sustainable farming in Uganda">
+    <meta name="keywords" content="agriculture, sustainable farming, Uganda, agribusiness, farm consulting, crop solutions">
+    
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2a7f3f;
+            --primary-dark: #1f6a32;
+            --primary-light: #e8f5e9;
+            --secondary: #f8a51b;
+            --dark: #212529;
+            --dark-gray: #495057;
+            --medium-gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 2rem;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .whatsapp-float i {
+            margin-top: 2px;
+        }
+
+        /* Custom Close Icon for Navbar Toggler */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 24px;
+            transition: var(--transition);
+        }
+
+        .navbar-toggler .navbar-toggler-icon::before,
+        .navbar-toggler .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: var(--dark);
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .navbar-toggler .navbar-toggler-icon::before {
+            top: 6px;
+        }
+
+        .navbar-toggler .navbar-toggler-icon::after {
+            bottom: 6px;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+            transform: rotate(45deg);
+            top: 11px;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+            transform: rotate(-45deg);
+            bottom: 11px;
+        }
+
+        /* Rest of your existing styles... */
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, .display-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: var(--white) !important;
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .navbar-brand img {
+            height: 48px;
+            transition: var(--transition);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0.75rem;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-tagline {
+            font-size: 0.65rem;
+            color: var(--medium-gray);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 0.1rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            padding: 0.5rem 1.25rem !important;
+            position: relative;
+            transition: var(--transition);
+            letter-spacing: 0.2px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-link.active {
+            font-weight: 600;
+            color: var(--primary) !important;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1.25rem;
+            width: calc(100% - 2.5rem);
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: var(--shadow-lg);
+            margin-top: 0.5rem;
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0;
+            min-width: 220px;
+        }
+
+        .dropdown-item {
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-radius: var(--radius-sm);
+            margin: 0 0.5rem;
+            width: auto;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: var(--primary);
+            color: var(--white) !important;
+            transform: translateX(3px);
+        }
+
+        .dropdown-divider {
+            border-color: rgba(0,0,0,0.05);
+            margin: 0.5rem 0;
+        }
+
+        /* Buttons */
+        .btn {
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(42, 127, 63, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(42, 127, 63, 0.3);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Search bar */
+        .search-container {
+            position: relative;
+            max-width: 280px;
+        }
+
+        .search-input {
+            border-radius: var(--radius-xl);
+            padding: 0.6rem 1.5rem;
+            padding-right: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(42, 127, 63, 0.1);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--medium-gray);
+            transition: var(--transition);
+        }
+
+        .search-button:hover {
+            color: var(--primary);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: linear-gradient(135deg, #1a3a23 0%, var(--dark) 100%);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-about p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-links a::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            margin-right: 0.75rem;
+            color: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info span {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-form .form-control {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--white);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-xl);
+            margin-bottom: 0.75rem;
+        }
+
+        .newsletter-form .form-control::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .newsletter-form .btn {
+            width: 100%;
+            border-radius: var(--radius-xl);
+            padding: 0.75rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .copyright a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .copyright a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: var(--white);
+                padding: 1rem;
+                margin-top: 0.5rem;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-md);
+            }
+            
+            .nav-item {
+                margin-bottom: 0.25rem;
+            }
+            
+            .nav-link.active::after {
+                display: none;
+            }
+            
+            .dropdown-menu {
+                box-shadow: none;
+                border: 1px solid rgba(0,0,0,0.05);
+                margin: 0.25rem 0;
+            }
+            
+            .search-container {
+                margin: 1rem 0;
+                max-width: 100%;
+            }
+            
+            main {
+                padding: 2.5rem 0;
+            }
+            
+            footer {
+                padding: 3rem 0 1.5rem;
+                text-align: center;
+            }
+            
+            .footer-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info {
+                text-align: center;
+            }
+            
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+
+        /* Animation for navbar on scroll */
+        @media (min-width: 992px) {
+            .navbar {
+                padding: 1rem 0;
+            }
+            
+            .navbar.scrolled {
+                padding: 0.5rem 0;
+            }
+            
+            .navbar.scrolled .navbar-brand img {
+                height: 40px;
+            }
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256766670007?text=Hello%20Eco%20Hope%20Co.%20Ltd,%20I%20would%20like%20to%20inquire%20about%20your%20services" 
+       class="whatsapp-float" 
+       target="_blank"
+       aria-label="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Enhanced Header/Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Eco Hope">
+                <div class="brand-text">
+                    <span class="brand-name">AGRICULTUAL</span>
+                    <span class="brand-tagline">inputs for farmers</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if '/services/' in request.path %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'services' %}">All Services</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'consultation' %}">Farm Consulting</a></li>
+                            <li><a class="dropdown-item" href="{% url 'equipment' %}">Equipment Supply</a></li>
+                            <li><a class="dropdown-item" href="{% url 'crop_solutions' %}">Crop Solutions</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <form class="search-container me-3" action="{% url 'search' %}" method="GET">
+                        <input class="form-control search-input" type="search" placeholder="Search..." name="q">
+                        <button class="search-button" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                    <a href="{% url 'consultation' %}" class="btn btn-primary d-none d-lg-flex">
+                        Consult Us <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main content -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Enhanced Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <h5 class="footer-title">About Eco Hope</h5>
+                        <p>Leading provider of innovative agricultural solutions for sustainable farming practices across Uganda since 2024.</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/ecohopecoltd" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/ecohopecoltd" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/company/ecohopecoltd" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/ecohopecoltd" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/channel/ecohopecoltd" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Services</a></li>
+                        <li><a href="{% url 'careers' %}">Careers</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Agricultural Road, Kagadi, Uganda</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+256 766 670007</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@ecohope.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 8:00AM - 5:00PM</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <span><a href="https://wa.me/256766670007" style="color: rgba(255,255,255,0.7); text-decoration: none;">Chat on WhatsApp</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-title">Newsletter</h5>
+                    <p class="text-muted">Subscribe to our newsletter for agricultural insights and updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="form-control" placeholder="Your Email" required>
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p class="mb-0">&copy; {% now "Y" %} Eco Hope Co. Ltd. All Rights Reserved. 
+                    <a href="{% url 'privacy_policy' %}">Privacy Policy</a> | <a href="{% url 'terms' %}">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    
+        // Activate dropdowns on hover for desktop
+        if (window.innerWidth > 991) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', () => {
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    if (toggle && menu) {
+                        const bsDropdown = new bootstrap.Dropdown(toggle);
+                        bsDropdown.show();
+                    }
+                });
+                
+                dropdown.addEventListener('mouseleave', () => {
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    if (toggle) {
+                        const bsDropdown = bootstrap.Dropdown.getInstance(toggle);
+                        bsDropdown.hide();
+                    }
+                });
+            });
+        }
+    
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link, .dropdown-item').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    const toggler = document.querySelector('.navbar-toggler');
+                    bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                    toggler.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    </script>
+    {% block extra_scripts %}{% endblock %}
+    </body>
+    </html>
+    
+    

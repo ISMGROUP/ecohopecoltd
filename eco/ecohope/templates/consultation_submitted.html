@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="py-7 text-center bg-light">
+    <div class="container">
+        <h1 class="display-4 text-success font-weight-bold mb-4">Thank You!</h1>
+        <p class="lead mb-5">Your consultation request has been successfully submitted.</p>
+        <a href="{% url 'home' %}" class="btn btn-success btn-lg">Back to Home</a>
+    </div>
+</section>
+{% endblock %}

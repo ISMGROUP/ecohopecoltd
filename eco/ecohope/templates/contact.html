@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Contact Page Styles */
+    .contact-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 5rem 0;
+    }
+    
+    .contact-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .contact-info {
+        padding: 2.5rem;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        height: 100%;
+    }
+    
+    .contact-info h2 {
+        position: relative;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .contact-info h2:after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background: white;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .contact-info ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .contact-info li {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .contact-info i {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        margin-top: 3px;
+    }
+    
+    .contact-form {
+        padding: 2.5rem;
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+    
+    .map-container {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Success message */
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+        border-radius: 8px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .contact-info {
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .contact-form {
+            border-radius: 0 0 12px 12px;
+        }
+    }
+</style>
+
+
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="contact-card">
+                    <div class="row no-gutters">
+                        <!-- Contact Info -->
+                        <div class="col-md-5">
+                            <div class="contact-info">
+                                <h2>Get in Touch</h2>
+                                <p>We'd love to hear from you! Reach out with any questions or inquiries.</p>
+                                
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div>
+                                            <strong>Address</strong><br>
+                                            Plot 12, Eco Hope Street<br>
+                                            Arua City, Uganda
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-envelope"></i>
+                                        <div>
+                                            <strong>Email</strong><br>
+                                            info@ecohopeco.com
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-phone-alt"></i>
+                                        <div>
+                                            <strong>Phone</strong><br>
+                                            +256 712 345 678
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-clock"></i>
+                                        <div>
+                                            <strong>Working Hours</strong><br>
+                                            Mon - Fri: 8:00am - 5:00pm
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Form -->
+                        <div class="col-md-7">
+                            <div class="contact-form">
+                                <h2 class="mb-4">Send Us a Message</h2>
+                                
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }} mb-4">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                
+                                <form method="post" action="{% url 'contact' %}">
+                                    {% csrf_token %}
+                                    
+                                    <div class="form-group">
+                                        <label for="name">Full Name *</label>
+                                        <input type="text" class="form-control" id="name" name="name" 
+                                               placeholder="Your name" required value="{{ form.name.value|default:'' }}">
+                                        {% if form.name.errors %}
+                                            <small class="text-danger">{{ form.name.errors.0 }}</small>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               placeholder="your.email@example.com" required value="{{ form.email.value|default:'' }}">
+                                        {% if form.email.errors %}
+                                            <small class="text-danger">{{ form.email.errors.0 }}</small>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               placeholder="+256 XXX XXX XXX" value="{{ form.phone.value|default:'' }}">
+                                        {% if form.phone.errors %}
+                                            <small class="text-danger">{{ form.phone.errors.0 }}</small>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" class="form-control" id="subject" name="subject" 
+                                               placeholder="What's this about?" value="{{ form.subject.value|default:'' }}">
+                                        {% if form.subject.errors %}
+                                            <small class="text-danger">{{ form.subject.errors.0 }}</small>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="message">Your Message *</label>
+                                        <textarea class="form-control" id="message" name="message" 
+                                                  rows="5" placeholder="How can we help you?" required>{{ form.message.value|default:'' }}</textarea>
+                                        {% if form.message.errors %}
+                                            <small class="text-danger">{{ form.message.errors.0 }}</small>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-success btn-block btn-lg mt-3">
+                                        <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="text-center mb-5">Our Location</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7536223157963!2d30.90841531526341!3d3.020866254055581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x176f9a8b9d9d9b9b%3A0x9b9b9b9b9b9b9b9b!2sArua%2C%20Uganda!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

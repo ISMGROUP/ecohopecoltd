@@ -1,0 +1,19 @@
+/* custom.css */
+
+#header {
+    background-color: #006400 !important; /* Eco green */
+    background-image: url("/static/admin_custom/img/logo.png");
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 10px center;
+    padding-left: 60px;
+    color: white;
+}
+
+#header h1 {
+    color: white !important;
+}
+
+.module caption {
+    color: #006400;
+}

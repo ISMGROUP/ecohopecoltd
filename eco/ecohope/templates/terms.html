@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .terms-header {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        padding: 5rem 0;
+        text-align: center;
+    }
+
+    .terms-header h1 {
+        font-weight: bold;
+    }
+
+    .terms-section {
+        padding: 3rem 0;
+    }
+
+    .terms-section h3 {
+        margin-top: 2rem;
+        font-weight: 600;
+        color: #28a745;
+    }
+
+    .terms-section p {
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .terms-section ul {
+        padding-left: 1.2rem;
+    }
+
+    .terms-section ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+        .terms-header h1 {
+            font-size: 2rem;
+        }
+
+        .terms-section {
+            padding: 2rem 1rem;
+        }
+    }
+</style>
+
+<!-- Hero Header -->
+<section class="terms-header">
+    <div class="container">
+        <h1 class="display-4">Terms & Conditions</h1>
+        <p class="lead mt-3">Last updated: April 18, 2025</p>
+    </div>
+</section>
+
+<!-- Terms Content -->
+<section class="terms-section">
+    <div class="container">
+        <h3>1. Introduction</h3>
+        <p>Welcome to Eco Hope Co. Ltd. These Terms and Conditions govern your use of our website and services. By accessing or using our website, you agree to comply with and be bound by these terms.</p>
+
+        <h3>2. Use of the Website</h3>
+        <p>You agree to use this website only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use of the website.</p>
+
+        <h3>3. Intellectual Property</h3>
+        <p>All content, trademarks, logos, and intellectual property on this website are owned by Eco Hope Co. Ltd, unless otherwise stated. You may not reproduce or redistribute any part without our prior written permission.</p>
+
+        <h3>4. Services</h3>
+        <ul>
+            <li>All services listed on the website are subject to availability.</li>
+            <li>Descriptions and pricing are accurate to the best of our knowledge but may be updated without prior notice.</li>
+        </ul>
+
+        <h3>5. Limitation of Liability</h3>
+        <p>Eco Hope Co. Ltd shall not be held liable for any indirect or consequential damages arising out of the use or inability to use the services or website content.</p>
+
+        <h3>6. Privacy Policy</h3>
+        <p>Your use of the website is also governed by our <a href="{% url 'privacy_policy' %}" class="text-success">Privacy Policy</a>, which outlines how we collect and manage your data.</p>
+
+        <h3>7. Termination</h3>
+        <p>We reserve the right to suspend or terminate your access to the website if you breach any of these Terms and Conditions.</p>
+
+        <h3>8. Governing Law</h3>
+        <p>These Terms shall be governed by and interpreted in accordance with the laws of your local jurisdiction, without regard to its conflict of law provisions.</p>
+
+        <h3>9. Changes to Terms</h3>
+        <p>We may update these Terms from time to time. Changes will be posted on this page with the updated date above. It is your responsibility to review them periodically.</p>
+
+        <h3>10. Contact Us</h3>
+        <p>If you have any questions about these Terms, please <a href="{% url 'contact' %}" class="text-success">contact us</a>.</p>
+    </div>
+</section>
+
+{% endblock %}

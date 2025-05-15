@@ -1,0 +1,56 @@
+/* Hero Section */
+.hero {
+    background: url("../images/hero-bg.jpg") no-repeat center center/cover;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.hero p {
+    font-size: 1.3rem;
+}
+.hero a {
+    margin-top: 20px;
+}
+
+/* About Section */
+.about-preview .container {
+    display: flex;
+    align-items: center;
+}
+.about-preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Services Section */
+.services .card {
+    transition: 0.3s ease-in-out;
+}
+.services .card:hover {
+    transform: scale(1.05);
+}
+
+/* Testimonials */
+.testimonial {
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+.testimonial p {
+    font-style: italic;
+}
+.testimonial h5 {
+    font-weight: bold;
+}
+
+/* Contact Section */
+.contact {
+    padding: 50px 0;
+}
+.contact h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}

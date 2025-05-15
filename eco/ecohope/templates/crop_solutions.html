@@ -1,0 +1,597 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Crop Solutions | Eco Hope Co. Ltd{% endblock %}
+
+{% block content %}
+<style>
+    .crop-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{% static "images/crop-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        min-height: 60vh;
+    }
+    
+    .crop-card {
+        border-radius: 10px;
+        overflow: hidden;
+        transition: var(--transition);
+        border: none;
+    }
+    
+    .crop-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .crop-card .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .solution-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 2;
+    }
+    
+    .crop-detail-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(42, 127, 63, 0.1);
+        color: var(--primary);
+        border-radius: 50%;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="crop-hero d-flex align-items-center">
+    <div class="container text-white text-center">
+        <h1 class="display-4 fw-bold mb-4">Crop Solutions</h1>
+        <p class="lead mb-5 mx-auto" style="max-width: 700px;">Specialized solutions for Uganda's key crops to maximize yield and quality.</p>
+        <a href="#crop-selector" class="btn btn-primary btn-lg px-5 py-3">Find Your Crop Solution</a>
+    </div>
+</section>
+
+<!-- Crop Categories -->
+<section class="py-7" id="crop-selector">
+    <div class="container">
+        <div class="text-center mb-6">
+            <span class="text-success fw-bold">OUR SOLUTIONS</span>
+            <h2 class="section-title">Crop-Specific Solutions</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">Select your crop to discover tailored solutions for optimal growth and productivity.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#maize" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/Maize.jpg' %}" class="card-img-top" alt="Maize">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Maize</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#coffee" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/coffee.jpg' %}" class="card-img-top" alt="Coffee">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Coffee</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#beans" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/bean.jpg' %}" class="card-img-top" alt="Beans">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Beans</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#bananas" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/banana.jpg' %}" class="card-img-top" alt="Bananas">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Bananas</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#vegetables" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/vegetables.jpg' %}" class="card-img-top" alt="Vegetables">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Vegetables</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#fruits" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/fruits.jpg' %}" class="card-img-top" alt="Fruits">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Fruits</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+                <a href="#onion" class="text-decoration-none">
+                    <div class="card crop-card h-100 border-0">
+                        <img src="{% static 'images/onion.jpg' %}" class="card-img-top" alt="Fruits">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">onions</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Maize Solutions -->
+<section class="py-7 bg-light" id="maize">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="{% static 'images/Maize.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">MAIZE SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing Maize Production</h2>
+                <p class="mb-5">Our comprehensive maize solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/maize.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Coffee Solutions -->
+<section class="py-7" id="coffee">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">
+                <img src="{% static 'images/coffee.jpg' %}" class="img-fluid rounded shadow" alt="Coffee Solutions">
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <span class="badge bg-success mb-3">COFFEE SOLUTIONS</span>
+                <h2 class="section-title mb-4">Premium Coffee Production</h2>
+                <p class="mb-5">Enhance the quality and quantity of your coffee harvest with our specialized solutions.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Variety Selection</h4>
+                        <p class="text-muted small">High-quality Arabica and Robusta varieties suited to your altitude.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Disease Control</h4>
+                        <p class="text-muted small">Effective solutions for coffee wilt, leaf rust, and berry disease.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pruning Techniques</h4>
+                        <p class="text-muted small">Proper pruning methods to maximize yield and plant health.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-wine-glass-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Processing</h4>
+                        <p class="text-muted small">Improved washing and drying methods for premium quality beans.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/coffee.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- beans Solutions -->
+<section class="py-7 bg-light" id="beans">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="{% static 'images/bean.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">BEANS SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing beans Production</h2>
+                <p class="mb-5">Our comprehensive beans solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/beans.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Banana Solutions -->
+<section class="py-7" id="coffee">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">
+                <img src="{% static 'images/banana.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">BANANA SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing Banana Production</h2>
+                <p class="mb-5">Our comprehensive banana solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/banana.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- vegetables Solutions -->
+<section class="py-7 bg-light" id="vegetables">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="{% static 'images/vegetables.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">VEGETABLE SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing Vegetable Production</h2>
+                <p class="mb-5">Our comprehensive Vegetable solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/vegetables.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- fruits Solutions -->
+<section class="py-7" id="coffee">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">
+                <img src="{% static 'images/fruits.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">FRUITS SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing fruits Production</h2>
+                <p class="mb-5">Our comprehensive fruits solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/fruits.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- onions Solutions -->
+<section class="py-7 bg-light" id="onion">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="{% static 'images/onion.jpg' %}" class="img-fluid rounded shadow" alt="Maize Solutions">
+            </div>
+            <div class="col-lg-6">
+                <span class="badge bg-success mb-3">ONIONS SOLUTIONS</span>
+                <h2 class="section-title mb-4">Optimizing onion Production</h2>
+                <p class="mb-5">Our comprehensive onion solutions address the key challenges Ugandan farmers face, from seed selection to post-harvest handling.</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">High-Yield Varieties</h4>
+                        <p class="text-muted small">Drought-resistant and disease-tolerant hybrid seeds adapted to local conditions.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Pest Control</h4>
+                        <p class="text-muted small">Integrated pest management for stem borers, fall armyworm, and storage pests.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Water Management</h4>
+                        <p class="text-muted small">Efficient irrigation techniques for dry season maize production.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="crop-detail-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h4 class="h5 fw-bold">Fertilization</h4>
+                        <p class="text-muted small">Customized fertilizer blends based on soil analysis for optimal nutrition.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'services' %}" class="btn btn-primary me-3">View Products</a>
+
+                    <a href="{% static 'guides/fruits.pdf' %}" class="btn btn-outline-success" download target="_blank" rel="noopener">Download Guide</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Showcase -->
+<section class="py-7 bg-light">
+    <div class="container">
+        <div class="text-center mb-6">
+            <span class="text-success fw-bold">RECOMMENDED PRODUCTS</span>
+            <h2 class="section-title">Solutions for Your Crops</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">High-quality inputs to address your crop-specific challenges.</p>
+        </div>
+        
+        <div class="row g-4">
+{% for product in crop_products %}
+<div class="col-md-6 col-lg-3">
+    <div class="card crop-card h-100">
+        {% if product.is_bestseller %}
+            <span class="solution-badge badge bg-warning text-dark">BESTSELLER</span>
+        {% endif %}
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="card-body">
+            <span class="badge bg-success mb-2">{{ product.category }}</span>
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text text-muted small">{{ product.short_description }}</p>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-success">UGX {{ product.price }}</span>
+                <a href="#" class="btn btn-sm btn-primary">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="col-12 text-center">
+    <div class="alert alert-info">
+        Our product catalog is currently being updated. Check back soon!
+    </div>
+</div>
+{% endfor %}
+
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-primary px-5">View All Crop Products</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Expert Advice Section -->
+<section class="py-7 bg-success text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="mb-3">Need Specific Advice for Your Crops?</h2>
+                <p class="mb-0">Our agricultural experts are ready to provide personalized recommendations for your farm.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="{% url 'contact' %}" class="btn btn-light btn-lg px-5">Contact Our Experts</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

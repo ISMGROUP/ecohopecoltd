@@ -1,0 +1,50 @@
+/* admin-custom.css - EcoHope Admin Styling */
+
+/* Customize background and fonts */
+body, .module {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f9f4 !important;
+}
+
+/* Customize the header */
+#header {
+    background-color: #228b22 !important; /* Eco green */
+    color: white !important;
+}
+
+#branding h1 {
+    font-size: 24px;
+    color: white !important;
+}
+
+/* Customize the sidebar */
+#nav-sidebar {
+    background-color: #dff0d8 !important;
+}
+
+/* Customize admin buttons */
+.button, .submit-row input {
+    background-color: #228b22 !important;
+    color: white !important;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.button:hover, .submit-row input:hover {
+    background-color: #196619 !important;
+}
+
+/* Customize table header in change list */
+table th {
+    background-color: #e0f3e0 !important;
+    color: #000;
+}
+
+/* Fix user avatar */
+.user-tools .user-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}

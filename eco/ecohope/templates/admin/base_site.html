@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Eco Hope Admin{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin_custom/css/custom.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <div id="site-name" style="display: flex; align-items: center; gap: 12px;">
+        <img src="{% static 'admin_custom/img/logo.png' %}" alt="Eco Hope Logo" style="height: 40px;">
+        <h1 style="margin: 0; font-size: 24px; color: white;">Eco Hope Admin</h1>
+    </div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

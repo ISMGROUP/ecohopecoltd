@@ -1,0 +1,201 @@
+
+    /* ========== Header Styles ========== */
+    :root {
+        --primary: #2E7D32;  /* Eco green */
+        --primary-light: #4CAF50;
+        --secondary: #FFC107; /* Accent yellow */
+        --dark: #263238;     /* Dark text */
+        --light: #f8f9fa;    /* Light background */
+        --white: #ffffff;
+        --transition: all 0.3s ease;
+    }
+
+    /* Top Bar */
+    .top-bar {
+        background-color: var(--primary);
+        color: var(--white);
+        font-size: 0.85rem;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .top-bar a {
+        color: var(--white);
+        transition: var(--transition);
+        text-decoration: none;
+    }
+
+    .top-bar a:hover {
+        color: var(--secondary);
+        text-decoration: none;
+    }
+
+    .social-icons a {
+        color: var(--white);
+        margin-left: 15px;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        display: inline-block;
+    }
+
+    .social-icons a:hover {
+        color: var(--secondary);
+        transform: translateY(-2px);
+    }
+
+    /* Main Header/Navbar */
+    .header {
+        transition: var(--transition);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        background-color: var(--white);
+    }
+
+    .navbar-shrink {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand img {
+        transition: var(--transition);
+        height: 50px;
+    }
+
+    .navbar-shrink .navbar-brand img {
+        height: 40px;
+    }
+
+    /* Navigation Links */
+    .nav-item {
+        margin: 0 3px;
+        position: relative;
+    }
+
+    .nav-link {
+        color: var(--dark) !important;
+        font-weight: 500;
+        padding: 10px 15px !important;
+        transition: var(--transition);
+        position: relative;
+        font-size: 0.95rem;
+    }
+
+    .nav-link:hover {
+        color: var(--primary) !important;
+    }
+
+    /* Active Link Indicator */
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        bottom: 0;
+        left: 15px;
+        transition: var(--transition);
+    }
+
+    .nav-link:hover::after,
+    .nav-item.active .nav-link::after {
+        width: calc(100% - 30px);
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 10px;
+        padding: 10px 0;
+        border-top: 3px solid var(--primary);
+    }
+
+    .dropdown-item {
+        padding: 8px 20px;
+        transition: var(--transition);
+        color: var(--dark);
+        font-size: 0.9rem;
+    }
+
+    .dropdown-item:hover {
+        background-color: var(--primary);
+        color: var(--white) !important;
+    }
+
+    .dropdown-divider {
+        border-color: rgba(0,0,0,0.05);
+    }
+
+    /* Search Box */
+    .search-box {
+        transition: var(--transition);
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+        background: var(--light);
+    }
+
+    .search-box.focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+
+    .search-box input {
+        border: none;
+        background: transparent;
+        min-width: 200px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .btn-search {
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        padding: 8px 15px;
+        transition: var(--transition);
+    }
+
+    .btn-search:hover {
+        background: var(--primary-light);
+    }
+
+    /* Mobile Menu */
+    @media (max-width: 991.98px) {
+        .navbar-collapse {
+            background: var(--white);
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .nav-item {
+            margin: 5px 0;
+        }
+
+        .nav-link::after {
+            display: none;
+        }
+
+        .search-box {
+            margin-top: 15px;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .top-bar .d-flex {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .top-contact {
+            margin-bottom: 8px;
+        }
+
+        .social-icons a {
+            margin: 0 8px;
+        }
+    }

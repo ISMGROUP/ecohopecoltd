@@ -1,0 +1,8 @@
+<h2>{{ job.title }}</h2>
+<p>{{ job.description }}</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Application</button>
+</form>
