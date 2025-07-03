@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-9ha&__jcf^(f6x=bvkv5=1lifh4x^##x4$)j4ij=z8@@b&&(va
 
 # Debug settings
 DEBUG = True
-ALLOWED_HOSTS = ['ecohopecoltd.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com']
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -39,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SITE_URL = 'http://127.0.0.1:8000'  # or your real domain
+
 
 
 # URLs and WSGI
