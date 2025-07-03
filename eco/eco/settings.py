@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-9ha&__jcf^(f6x=bvkv5=1lifh4x^##x4$)j4ij=z8@@b&&(va
 
 # Debug settings
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['onrender.com']
 
 # Installed apps
 INSTALLED_APPS = [
