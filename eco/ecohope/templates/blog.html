@@ -179,22 +179,19 @@
     }
 </style>
 
+
 <!-- Hero Section -->
 <section class="blog-hero">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 font-weight-bold mb-4">Eco Hope Blog</h1>
-                <p class="lead mb-5">Insights, news, and stories about sustainable agriculture in Uganda</p>
-                <div class="search-box">
-                    <form action="{% url 'blog' %}" method="get">
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-lg" name="q" placeholder="Search blog posts...">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+    <div class="container text-center">
+        <h1 class="display-4 font-weight-bold mb-4">Eco Hope Blog</h1>
+        <p class="lead mb-5">Insights, news, and stories about sustainable agriculture in Uganda</p>
+        <div class="search-box">
+            <form action="{% url 'blog' %}" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-lg" name="q" placeholder="Search blog posts...">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
@@ -203,110 +200,62 @@
 <section class="py-7">
     <div class="container">
         <div class="row">
-            <!-- Main Blog Content -->
+            <!-- Main Blog Posts -->
             <div class="col-lg-8">
                 <div class="row">
-                    <!-- Blog Post 1 -->
+                    {% for post in posts %}
                     <div class="col-md-6 mb-5">
                         <div class="blog-card">
-                            <img src="{% static 'images/blog1.jpg' %}" class="card-img-top" alt="Sustainable Farming">
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
                             <div class="card-body">
                                 <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> June 15, 2023</span>
-                                    <span><i class="far fa-user"></i> By Asizo Viola</span>
+                                    <span><i class="far fa-calendar-alt"></i> {{ post.published_date|date:"F d, Y" }}</span>
+                                    <span><i class="far fa-user"></i> By {{ post.author }}</span>
                                 </div>
-                                <h3 class="card-title">5 Sustainable Farming Practices for Uganda</h3>
-                                <p class="card-text">Discover how Ugandan farmers are adopting eco-friendly techniques to improve yields while protecting the environment...</p>
+                                <h2 class="card-title h5">{{ post.title }}</h2>
+                                <p class="card-text">{{ post.excerpt|truncatewords:25 }}</p>
                                 <div class="mb-3">
-                                    <a href="#" class="tag">Sustainability</a>
-                                    <a href="#" class="tag">Farming</a>
-                                    <a href="#" class="tag">Uganda</a>
+                                    {% for tag in post.tags.all %}
+                                    <a href="{% url 'blog' %}?tag={{ tag.name }}" class="tag">{{ tag.name }}</a>
+                                    {% endfor %}
                                 </div>
-                                <a href="#" class="btn btn-outline-success">Read More</a>
+                                <a href="{% url 'blog_detail' post.slug %}" class="btn btn-outline-success">Read More</a>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Blog Post 2 -->
-                    <div class="col-md-6 mb-5">
-                        <div class="blog-card">
-                            <img src="{% static 'images/blog2.jpg' %}" class="card-img-top" alt="Seed Selection">
-                            <div class="card-body">
-                                <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> May 28, 2023</span>
-                                    <span><i class="far fa-user"></i> By John Doe</span>
-                                </div>
-                                <h3 class="card-title">Choosing the Right Seeds for Your Climate</h3>
-                                <p class="card-text">Learn how to select the best seed varieties for Uganda's diverse climate zones to maximize your harvest potential...</p>
-                                <div class="mb-3">
-                                    <a href="#" class="tag">Seeds</a>
-                                    <a href="#" class="tag">Climate</a>
-                                    <a href="#" class="tag">Tips</a>
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Blog Post 3 -->
-                    <div class="col-md-6 mb-5">
-                        <div class="blog-card">
-                            <img src="{% static 'images/blog3.jpg' %}" class="card-img-top" alt="Organic Fertilizers">
-                            <div class="card-body">
-                                <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> April 12, 2023</span>
-                                    <span><i class="far fa-user"></i> By Jane Smith</span>
-                                </div>
-                                <h3 class="card-title">The Benefits of Organic Fertilizers</h3>
-                                <p class="card-text">Why more Ugandan farmers are switching to organic fertilizers and how it's improving soil health across the country...</p>
-                                <div class="mb-3">
-                                    <a href="#" class="tag">Fertilizers</a>
-                                    <a href="#" class="tag">Organic</a>
-                                    <a href="#" class="tag">Soil Health</a>
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Blog Post 4 -->
-                    <div class="col-md-6 mb-5">
-                        <div class="blog-card">
-                            <img src="{% static 'images/blog4.jpg' %}" class="card-img-top" alt="Irrigation Techniques">
-                            <div class="card-body">
-                                <div class="blog-meta">
-                                    <span><i class="far fa-calendar-alt"></i> March 5, 2023</span>
-                                    <span><i class="far fa-user"></i> By Robert Omondi</span>
-                                </div>
-                                <h3 class="card-title">Water-Saving Irrigation Techniques</h3>
-                                <p class="card-text">Innovative irrigation methods that are helping Ugandan farmers conserve water while maintaining crop yields...</p>
-                                <div class="mb-3">
-                                    <a href="#" class="tag">Irrigation</a>
-                                    <a href="#" class="tag">Water</a>
-                                    <a href="#" class="tag">Technology</a>
-                                </div>
-                                <a href="#" class="btn btn-outline-success">Read More</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <p>No blog posts available.</p>
+                    {% endfor %}
                 </div>
-                
+
                 <!-- Pagination -->
-                <nav aria-label="Blog pagination">
+                {% if is_paginated %}
+                <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        {% if page_obj.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
                         </li>
+                        {% endif %}
+
+                        {% for num in paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                            {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </nav>
+                {% endif %}
             </div>
-            
+
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sidebar-widget">
@@ -314,83 +263,41 @@
                     <p>The Eco Hope blog shares knowledge, stories, and innovations in sustainable agriculture. Our experts and guest contributors provide practical advice for farmers across Uganda.</p>
                     <a href="{% url 'about' %}" class="btn btn-outline-success btn-sm">Learn About Us</a>
                 </div>
-                
-                <div class="sidebar-widget">
-                    <h4>Categories</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Sustainable Farming</a></li>
-                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Crop Management</a></li>
-                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Soil Health</a></li>
-                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Pest Control</a></li>
-                        <li class="mb-2"><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Farmer Stories</a></li>
-                        <li><a href="#" class="text-success"><i class="fas fa-chevron-right mr-2"></i> Company News</a></li>
-                    </ul>
-                </div>
-                
+
+                <!-- You can also make Recent Posts dynamic -->
                 <div class="sidebar-widget">
                     <h4>Recent Posts</h4>
+                    {% for post in recent_posts %}
                     <div class="recent-post">
-                        <img src="{% static 'images/blog-thumb1.jpg' %}" class="recent-post-img" alt="Post thumb">
+                        <img src="{{ post.image.url }}" class="recent-post-img" alt="{{ post.title }}">
                         <div>
-                            <a href="#" class="recent-post-title">Improving Maize Yields in Dry Seasons</a>
-                            <div class="recent-post-date">June 5, 2023</div>
+                            <a href="{% url 'blog_detail' post.slug %}" class="recent-post-title">{{ post.title|truncatewords:6 }}</a>
+                            <div class="recent-post-date">{{ post.published_date|date:"M d, Y" }}</div>
                         </div>
                     </div>
-                    <div class="recent-post">
-                        <img src="{% static 'images/blog-thumb2.jpg' %}" class="recent-post-img" alt="Post thumb">
-                        <div>
-                            <a href="#" class="recent-post-title">The Future of Organic Farming in Uganda</a>
-                            <div class="recent-post-date">May 22, 2023</div>
-                        </div>
-                    </div>
-                    <div class="recent-post">
-                        <img src="{% static 'images/blog-thumb3.jpg' %}" class="recent-post-img" alt="Post thumb">
-                        <div>
-                            <a href="#" class="recent-post-title">New Seed Varieties for 2023</a>
-                            <div class="recent-post-date">May 10, 2023</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="sidebar-widget">
-                    <h4>Tags</h4>
-                    <div class="tags">
-                        <a href="#" class="tag">Agriculture</a>
-                        <a href="#" class="tag">Farming</a>
-                        <a href="#" class="tag">Sustainability</a>
-                        <a href="#" class="tag">Seeds</a>
-                        <a href="#" class="tag">Fertilizers</a>
-                        <a href="#" class="tag">Irrigation</a>
-                        <a href="#" class="tag">Uganda</a>
-                        <a href="#" class="tag">Tips</a>
-                        <a href="#" class="tag">Technology</a>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Newsletter Section -->
+<!-- Newsletter -->
 <section class="py-7 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h3 class="font-weight-bold mb-4">Subscribe to Our Newsletter</h3>
-                <p class="mb-5">Get the latest agricultural tips, news, and updates directly to your inbox</p>
-                <form class="form-inline justify-content-center">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <input type="email" class="form-control form-control-lg" placeholder="Your email address">
-                    </div>
-                    <button type="submit" class="btn btn-success mb-2 btn-lg">Subscribe</button>
-                </form>
+    <div class="container text-center">
+        <h3 class="font-weight-bold mb-4">Subscribe to Our Newsletter</h3>
+        <p class="mb-5">Get the latest agricultural tips, news, and updates directly to your inbox</p>
+        <form class="form-inline justify-content-center" method="post" action="{% url 'newsletter' %}">
+            {% csrf_token %}
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="email" name="email" required class="form-control form-control-lg" placeholder="Your email address">
             </div>
-        </div>
+            <button type="submit" class="btn btn-success mb-2 btn-lg">Subscribe</button>
+        </form>
     </div>
 </section>
 
 {% endblock %}
-
 {% block extra_scripts %}
 <script>
     // Blog search functionality

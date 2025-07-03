@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Service, Consultation, CropSolution, Equipment, Subscriber, Career, BlogPost, TeamMember, ContactMessage, HeroImage, Testimonial
+from .models import Product, BlogPost, Service, Consultation, CropSolution, Equipment, Subscriber, Career, BlogPost, TeamMember, ContactMessage, HeroImage, Testimonial
 from .forms import SearchForm
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
@@ -11,10 +11,53 @@ import smtplib
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.db.models import Q
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .models import BlogPost, Subscriber
+from django.core.mail import send_mail
+from django.conf import settings
 # Search View
 
 from .models import Job, Application
 from .forms import ApplicationForm
+
+from django.shortcuts import render
+from .models import BlogPost
+from django.core.paginator import Paginator
+
+def blog(request):
+    query = request.GET.get("q")
+    if query:
+        posts = BlogPost.objects.filter(title__icontains=query)
+    else:
+        posts = BlogPost.objects.all().order_by('-published_date')
+
+    paginator = Paginator(posts, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        "posts": page_obj,
+        "page_obj": page_obj,
+        "is_paginated": page_obj.has_other_pages(),
+        "recent_posts": BlogPost.objects.all().order_by('-published_date')[:3],
+    }
+    return render(request, "blog.html", context)
+
+def blog_detail(request, slug):
+    post = get_object_or_404(BlogPost, slug=slug)
+    return render(request, 'blog_detail.html', {'post': post})
+@receiver(post_save, sender=BlogPost)
+def notify_subscribers(sender, instance, created, **kwargs):
+    if created and instance.published:
+        subscribers = Subscriber.objects.all()
+        subject = f"New Blog Post: {instance.title}"
+        message = f"{instance.title}\n\n{instance.content[:200]}...\n\nRead more on the blog."
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [s.email for s in subscribers]
+
+        if recipient_list:
+            send_mail(subject, message, from_email, recipient_list)
 
 def job_list(request):
     jobs = Job.objects.all()
@@ -127,17 +170,6 @@ def careers(request):
         ]
     }
     return render(request, 'careers.html', context)
-
-# Blog Page View
-def blog(request):
-    context = {
-        'title': 'Our Blog',
-        'posts': [
-            {'title': 'Sustainable Farming Tips', 'date': '2025-04-03'},
-            {'title': 'The Future of Agribusiness in Uganda', 'date': '2025-03-28'}
-        ]
-    }
-    return render(request, 'blog.html', context)
 
 # Contact Page View
 def contact(request):

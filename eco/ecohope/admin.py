@@ -1,7 +1,7 @@
 # admin.py
 
 from django.contrib import admin
-from .models import Service, HeroImage, Testimonial, Subscriber, Product
+from .models import Service, HeroImage, Testimonial, Subscriber, Product, BlogPost
 
 from django.contrib import admin
 
@@ -34,6 +34,8 @@ class CropSolutionAdmin(admin.ModelAdmin):
 admin.site.register(Job)
 admin.site.register(Application)
 admin.site.register(Equipment)
+
+admin.site.register(BlogPost)
 
 @admin.register(Consultation)
 class ConsultationAdmin(admin.ModelAdmin):

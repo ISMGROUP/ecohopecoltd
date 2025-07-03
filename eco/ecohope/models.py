@@ -2,6 +2,28 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
+# blog/models.py
+
+
+from django.db import models
+from taggit.managers import TaggableManager
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    author = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='blog_images/')
+    excerpt = models.TextField()
+    content = models.TextField()
+    published_date = models.DateField(auto_now_add=True)
+    tags = TaggableManager()
+    published = models.BooleanField(default=False)  # <-- Add this line
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 
 class CropSolution(models.Model):
     name = models.CharField(max_length=100)
@@ -108,15 +130,6 @@ class Career(models.Model):
     def __str__(self):
         return self.title
 
-# Model for Blog Posts
-class BlogPost(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    author = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
 
 # Model for Contact Messages
 class ContactMessage(models.Model):
