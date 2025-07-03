@@ -11,6 +11,8 @@ SECRET_KEY = 'django-insecure-9ha&__jcf^(f6x=bvkv5=1lifh4x^##x4$)j4ij=z8@@b&&(va
 DEBUG = True
 ALLOWED_HOSTS = ['ecohopecoltd.onrender.com']
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Installed apps
 INSTALLED_APPS = [
     'jazzmin',
