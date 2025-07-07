@@ -1,6 +1,6 @@
 # EcoHope Co. Ltd - Agricultural Platform
 
-![EcoHope Screenshot](./screenshot.png) *(Add a screenshot if available)*  
+![EcoHope Screenshot](./logo3.png) *(Add a screenshot if available)*  
 ![GitHub last commit](https://img.shields.io/github/last-commit/sangaben/ecohope?color=green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
@@ -12,7 +12,7 @@
 
 ## ✨ Key Features
 - **Farmer Dashboard** - Personalized crop/livestock management tools
-- **Marketplace** - Buy/sell agricultural products
+- **Marketplace** - Buy agricultural products
 - **Knowledge Base** - Farming techniques and best practices
 - **Weather Integration** - Localized forecasts
 - **Admin Portal** - Content management and analytics
