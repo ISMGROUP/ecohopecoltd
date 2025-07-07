@@ -1,6 +1,6 @@
 # EcoHope Co. Ltd - Agricultural Platform
 
-![EcoHope Screenshot](./logo3.png) *(Add a screenshot if available)*  
+![EcoHope Screenshot](./logo3.png)  
 ![GitHub last commit](https://img.shields.io/github/last-commit/sangaben/ecohope?color=green)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
@@ -38,9 +38,7 @@
 **My Contributions:**
 - Designed and implemented the farmer dashboard UI
 - Developed the Django REST API endpoints
-- Integrated weather data API
 - Configured AWS S3 for media storage
-- Implemented user authentication system
 
 ---
 
