@@ -33,7 +33,6 @@
 ## 🚀 Project Development
 **Developed by:**  
 👨‍💻 **Sanga Ben** (Full-Stack Developer)  
-🤝 **Your Name** (Your Role)  
 
 **My Contributions:**
 - Designed and implemented the farmer dashboard UI
